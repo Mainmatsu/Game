@@ -19,6 +19,8 @@ namespace MainGameProject
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        Texture2D texture;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -46,7 +48,7 @@ namespace MainGameProject
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            texture = Content.Load<Texture2D>(@"Images/Logo");
             // TODO: use this.Content to load your game content here
         }
 
@@ -82,6 +84,9 @@ namespace MainGameProject
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatch.Begin();
+            spriteBatch.Draw(texture, Vector2.Zero, Color.White);
+            spriteBatch.End();
 
             // TODO: Add your drawing code here
 
