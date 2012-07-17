@@ -19,7 +19,9 @@ namespace MainGameProject
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Texture2D texture;
+        ModelManager modelManager;
+
+        public Camera camera { get; protected set; }
 
         public Game1()
         {
@@ -36,6 +38,10 @@ namespace MainGameProject
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            modelManager = new ModelManager(this);
+            camera = new Camera(this, new Vector3(0, 0, 1000), Vector3.Zero, Vector3.Up);
+            Components.Add(camera);
+            Components.Add(modelManager);
 
             base.Initialize();
         }
@@ -48,7 +54,7 @@ namespace MainGameProject
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            texture = Content.Load<Texture2D>(@"Images/Logo");
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -68,9 +74,12 @@ namespace MainGameProject
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+
+
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+            
 
             // TODO: Add your update logic here
 
@@ -83,12 +92,7 @@ namespace MainGameProject
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
-            spriteBatch.Draw(texture, Vector2.Zero, Color.White);
-            spriteBatch.End();
-
-            // TODO: Add your drawing code here
+            GraphicsDevice.Clear(Color.White);
 
             base.Draw(gameTime);
         }
